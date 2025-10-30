@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +25,7 @@ import com.moselix.portal.modal.Student;
 import com.moselix.portal.security.AuthService;
 import com.moselix.portal.service.StudentService;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 //import lombok.Value;
@@ -62,6 +62,13 @@ public class UserController {
 
 	    @Value("${huggingface.model}")
 	    private String modelName;
+	    
+	    @PostConstruct
+	    public void checkEnv() {
+	        System.out.println("🔹 apiUrl = " + apiUrl);
+	        System.out.println("🔹 apiKey = " + apiKey);
+	        System.out.println("🔹 modelName = " + modelName);
+	    }
 
 	    private final RestTemplate restTemplate = new RestTemplate();
 
